@@ -161,7 +161,7 @@
       <main id="main-content" class="opacity-0 transition-opacity duration-1000 relative">
         <header class="relative text-center min-h-screen flex flex-col items-center justify-center p-4 overflow-hidden z-10">
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/10 z-10"></div>
-            <img src="https://ik.imagekit.io/6iz6c073z/IMG_5310.jpeg?updatedAt=1749700492272" class="absolute inset-0 w-full h-full object-cover kenburns-active" alt="Nosso pedido de namoro" style="object-position: center 20%;">
+            <img src="https://ik.imagekit.io/6iz6c073z/IMG_5310.jpeg?updatedAt=1749700492272" class="absolute inset-0 w-full h-full object-cover" alt="Nosso pedido de namoro" style="object-position: center 20%;">
             <div class="relative z-20">
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-script text-white drop-shadow-lg">O Nosso Infinito Particular</h1>
                 <p class="text-xl md:text-2xl mt-4 text-pink-300 font-light">Uma viagem pelas nossas memórias</p>
@@ -231,7 +231,6 @@
                 <section id="quiz-section">
                     <h2 class="text-4xl font-display text-center mb-12 text-indigo-500 dark:text-indigo-400">Quiz: Nossa História</h2>
                     <div id="quiz-container" class="max-w-2xl mx-auto text-center">
-                        <!-- Conteúdo do quiz será inserido aqui pelo JS -->
                     </div>
                 </section>
 
@@ -277,6 +276,10 @@
             <button id="galaxy-exit-btn" class="absolute bottom-10 left-1/2 -translate-x-1/2 interactive-item bg-gradient-to-r from-pink-500 to-amber-500 font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300 pointer-events-auto">
                 <i class="fas fa-arrow-left mr-2"></i> Voltar à Realidade
             </button>
+            <div id="galaxy-loader" class="absolute inset-0 bg-black/50 backdrop-blur-sm flex-col items-center justify-center pointer-events-none text-white transition-opacity duration-500 z-50 hidden">
+                 <i class="fas fa-meteor fa-spin text-cyan-300 text-6xl"></i>
+                 <p class="mt-4 text-lg font-script">Construindo galáxia...</p>
+            </div>
             <div class="absolute top-5 right-5 text-sm opacity-70 hidden md:block text-center">
                  <p>Arraste para orbitar</p>
                  <p>Scroll para zoom</p>
@@ -361,68 +364,28 @@
                 { src: 'https://ik.imagekit.io/6iz6c073z/IMG_6183.jpeg?updatedAt=1749695864544', alt: 'Dentro de um balão' }
             ],
             musicBox: { notes: ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5'], colors: ['text-red-400', 'text-orange-400', 'text-yellow-400', 'text-green-400', 'text-blue-400', 'text-indigo-400', 'text-violet-400', 'text-pink-400'] },
-            // Otimização de texturas e imagens: 8K -> 2K e adicionando transformações do ImageKit para mobile
             galaxyPlanets: [
-                 { id: 'mercury', name: 'Planeta dos Começos', message: 'Nosso primeiro encontro, o frio na barriga, a certeza de que algo especial estava começando.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_mercury.jpg?updatedAt=1749709638658', size: 2.5, hasAtmosphere: false, imageUrl: `https://ik.imagekit.io/6iz6c073z/IMG_6162.jpeg?updatedAt=1749662348390${isMobile() ? '?tr=w-400,q-80' : ''}` },
-                 { id: 'venus', name: 'Planeta das Risadas', message: 'Aqui guardamos todas as nossas gargalhadas, piadas internas e os momentos mais bobos e felizes.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_venus_surface.jpg?updatedAt=1749709639219', size: 3, hasAtmosphere: true, atmosphereColor: 0xf59e0b, imageUrl: `https://ik.imagekit.io/6iz6c073z/ED17AD51-C40B-4A0F-A737-FE64544FB83E.jpeg?updatedAt=1749662348414${isMobile() ? '?tr=w-400,q-80' : ''}` },
-                 { id: 'earth', name: 'Planeta da Cumplicidade', message: 'Nossa sintonia e entendimento, que nos faz sentir que nos conhecemos há várias vidas.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_earth_daymap.jpg?updatedAt=1749709400422', size: 3.2, hasAtmosphere: true, atmosphereColor: 0x3b82f6, imageUrl: `https://ik.imagekit.io/6iz6c073z/23B91AC4-F585-4C38-86F6-5AAEB326EB3B.jpg?updatedAt=1749695866094${isMobile() ? '?tr=w-400,q-80' : ''}` },
-                 { id: 'mars', name: 'Planeta dos Abraços', message: 'Onde cada abraço é um refúgio, um porto seguro para nossos corações.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_mars.jpg?updatedAt=1749709559940', size: 2.8, hasAtmosphere: true, atmosphereColor: 0xef4444, imageUrl: `https://ik.imagekit.io/6iz6c073z/397CB3CD-55C3-4FE7-AC19-5EB3B9429FA6.JPG?updatedAt=1749695863738${isMobile() ? '?tr=w-400,q-80' : ''}` },
+                 { id: 'mercury', name: 'Planeta dos Começos', message: 'Nosso primeiro encontro, o frio na barriga, a certeza de que algo especial estava começando.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_mercury.jpg?tr=w-1024,q-80', size: 2.5, hasAtmosphere: false, imageUrl: `https://ik.imagekit.io/6iz6c073z/IMG_6162.jpeg?updatedAt=1749662348390${isMobile() ? '?tr=w-400,q-80' : ''}` },
+                 { id: 'venus', name: 'Planeta das Risadas', message: 'Aqui guardamos todas as nossas gargalhadas, piadas internas e os momentos mais bobos e felizes.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_venus_surface.jpg?tr=w-1024,q-80', size: 3, hasAtmosphere: true, atmosphereColor: 0xf59e0b, imageUrl: `https://ik.imagekit.io/6iz6c073z/ED17AD51-C40B-4A0F-A737-FE64544FB83E.jpeg?updatedAt=1749662348414${isMobile() ? '?tr=w-400,q-80' : ''}` },
+                 { id: 'earth', name: 'Planeta da Cumplicidade', message: 'Nossa sintonia e entendimento, que nos faz sentir que nos conhecemos há várias vidas.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_earth_daymap.jpg?tr=w-1024,q-80', size: 3.2, hasAtmosphere: true, atmosphereColor: 0x3b82f6, imageUrl: `https://ik.imagekit.io/6iz6c073z/23B91AC4-F585-4C38-86F6-5AAEB326EB3B.jpg?updatedAt=1749695866094${isMobile() ? '?tr=w-400,q-80' : ''}` },
+                 { id: 'mars', name: 'Planeta dos Abraços', message: 'Onde cada abraço é um refúgio, um porto seguro para nossos corações.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_mars.jpg?tr=w-1024,q-80', size: 2.8, hasAtmosphere: true, atmosphereColor: 0xef4444, imageUrl: `https://ik.imagekit.io/6iz6c073z/397CB3CD-55C3-4FE7-AC19-5EB3B9429FA6.JPG?updatedAt=1749695863738${isMobile() ? '?tr=w-400,q-80' : ''}` },
                  { id: 'jupiter', name: 'Planeta dos Sonhos', message: 'Nossos sonhos compartilhados, as aventuras que ainda viveremos e o futuro que estamos construindo juntos.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_jupiter.jpg?updatedAt=1749709662603', size: 6, hasAtmosphere: false, imageUrl: `https://ik.imagekit.io/6iz6c073z/IMG_6179.jpeg?updatedAt=1749695864622${isMobile() ? '?tr=w-400,q-80' : ''}` },
                  { id: 'saturn', name: 'Planeta da Serenidade', message: 'A paz que encontramos um no outro, a calma de simplesmente estar ao seu lado.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_saturn.jpg?updatedAt=1749709535530', ringTextureUrl: 'https://ik.imagekit.io/6iz6c073z/8k_saturn_ring_alpha.png?updatedAt=1749709533313', size: 5, hasAtmosphere: false, imageUrl: `https://ik.imagekit.io/6iz6c073z/IMG_6022.jpeg?updatedAt=1749695865940${isMobile() ? '?tr=w-400,q-80' : ''}` },
-                 { id: 'neptune', name: 'Oceano de Sentimentos', message: 'A profundidade do nosso amor, vasto e cheio de mistérios que ainda vamos desvendar.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_neptune.jpg?updatedAt=1749749923405', size: 4, hasAtmosphere: true, atmosphereColor: 0x38bdf8, imageUrl: `https://ik.imagekit.io/6iz6c073z/IMG_6235.jpeg?updatedAt=1749695864835${isMobile() ? '?tr=w-400,q-80' : ''}` }
+                 { id: 'neptune', name: 'Oceano de Sentimentos', message: 'A profundidade do nosso amor, vasto e cheio de mistérios que ainda vamos desvendar.', textureUrl: 'https://ik.imagekit.io/6iz6c073z/2k_neptune.jpg?tr=w-1024,q-80', size: 4, hasAtmosphere: true, atmosphereColor: 0x38bdf8, imageUrl: `https://ik.imagekit.io/6iz6c073z/IMG_6235.jpeg?updatedAt=1749695864835${isMobile() ? '?tr=w-400,q-80' : ''}` }
             ],
             quiz: [
-                {
-                    question: "Qual foi a primeira cantada que o Matheus usou?",
-                    options: ["Seu pai é padeiro?", "O seu cabelo brilha mais que o sol", "talvez seja seu brilho próprio?", "Você vem sempre aqui?"],
-                    correctAnswer: 2,
-                    feedback: {
-                        correct: "Isso mesmo! Uma cantada clássica para um momento inesquecível.",
-                        incorrect: "Quase! A cantada foi sobre o brilho que já era todo dela."
-                    }
-                },
-                {
-                    question: "Qual personagem de videogame simboliza nosso primeiro encontro?",
-                    options: ["Mario", "Sonic", "Link", "Pac-Man"],
-                    correctAnswer: 1,
-                     feedback: {
-                        correct: "Exato! Rápido como nossos corações batendo naquele dia.",
-                        incorrect: "Não foi esse... Pense em velocidade e anéis dourados!"
-                    }
-                },
-                {
-                    question: "Onde foi nosso pedido de namoro?",
-                    options: ["Parque Ibirapuera", "Na praia de Ubatuba", "Na Gamescon", "Em Itapevi"],
-                    correctAnswer: 0,
-                     feedback: {
-                        correct: "Memória perfeita! Um momento mágico em meio à natureza.",
-                        incorrect: "O pedido foi em um lugar muito especial, mas não foi aí."
-                    }
-                },
-                {
-                    question: "O que estávamos fazendo na nossa primeira viagem juntos, um dia após o pedido de namoro?",
-                    options: ["Vendo o pôr do sol", "Andando de balão", "Um passeio de barco em Ubatuba", "Jantando em um restaurante chique"],
-                    correctAnswer: 2,
-                     feedback: {
-                        correct: "Sim! Navegando juntos rumo ao nosso futuro.",
-                        incorrect: "Foi uma aventura, mas não essa. Envolvia o mar!"
-                    }
-                },
-                {
-                    question: "Qual evento chuvoso se tornou uma memória mágica com fogos de artifício?",
-                    options: ["Show de carros em Itapevi", "Festa de Ano Novo", "Passeio no parque", "Viagem para a praia"],
-                    correctAnswer: 0,
-                     feedback: {
-                        correct: "Isso! Nem a chuva conseguiu apagar o brilho daquele momento.",
-                        incorrect: "A chuva nos pegou de surpresa em outro evento especial."
-                    }
-                }
+                { question: "Qual foi a primeira cantada que o Matheus usou?", options: ["Seu pai é padeiro?", "O seu cabelo brilha mais que o sol", "talvez seja seu brilho próprio?", "Você vem sempre aqui?"], correctAnswer: 2, feedback: { correct: "Isso mesmo! Uma cantada clássica para um momento inesquecível.", incorrect: "Quase! A cantada foi sobre o brilho que já era todo dela." } },
+                { question: "Qual personagem de videogame simboliza nosso primeiro encontro?", options: ["Mario", "Sonic", "Link", "Pac-Man"], correctAnswer: 1, feedback: { correct: "Exato! Rápido como nossos corações batendo naquele dia.", incorrect: "Não foi esse... Pense em velocidade e anéis dourados!" } },
+                { question: "Onde foi nosso pedido de namoro?", options: ["Parque Ibirapuera", "Na praia de Ubatuba", "Na Gamescon", "Em Itapevi"], correctAnswer: 0, feedback: { correct: "Memória perfeita! Um momento mágico em meio à natureza.", incorrect: "O pedido foi em um lugar muito especial, mas não foi aí." } },
+                { question: "O que estávamos fazendo na nossa primeira viagem juntos, um dia após o pedido de namoro?", options: ["Vendo o pôr do sol", "Andando de balão", "Um passeio de barco em Ubatuba", "Jantando em um restaurante chique"], correctAnswer: 2, feedback: { correct: "Sim! Navegando juntos rumo ao nosso futuro.", incorrect: "Foi uma aventura, mas não essa. Envolvia o mar!" } },
+                { question: "Qual evento chuvoso se tornou uma memória mágica com fogos de artifício?", options: ["Show de carros em Itapevi", "Festa de Ano Novo", "Passeio no parque", "Viagem para a praia"], correctAnswer: 0, feedback: { correct: "Isso! Nem a chuva conseguiu apagar o brilho daquele momento.", incorrect: "A chuva nos pegou de surpresa em outro evento especial." } }
             ]
         };
 
         document.addEventListener('DOMContentLoaded', () => {
             const App = {
                 isUnlocked: false,
+                isGalaxyInitialized: false, // [OTIMIZAÇÃO] Controla se a galáxia já foi criada
                 shuffledReasons: [],
                 memoryGame: { timer: null },
                 quiz: {
@@ -437,6 +400,7 @@
                     focusedPlanet: null,
                     isCameraMoving: false,
                     initialCameraPos: new THREE.Vector3(0, 50, 150),
+                    animationFrameId: null, // [GERENCIAMENTO DE MEMÓRIA] Para parar a animação
                 },
                 
                 elements: {
@@ -469,6 +433,7 @@
                     finalGameAttempts: document.getElementById('final-game-attempts'),
                     galaxyBtn: document.getElementById('galaxy-btn'),
                     galaxyMode: document.getElementById('galaxy-mode'),
+                    galaxyLoader: document.getElementById('galaxy-loader'),
                     galaxyExitBtn: document.getElementById('galaxy-exit-btn'),
                     galaxyOrbitBtn: document.getElementById('galaxy-orbit-btn'),
                     galaxySidebar: document.getElementById('galaxy-planet-sidebar'),
@@ -480,6 +445,7 @@
                     sidebarNextBtn: document.getElementById('sidebar-next-btn'),
                     quizContainer: document.getElementById('quiz-container'),
                     confettiContainer: document.getElementById('confetti-container'),
+                    headerImage: document.querySelector('header img'),
                 },
 
                 init() {
@@ -488,7 +454,7 @@
                         this.elements.lockScreen.classList.remove('opacity-0');
                         this.setupLockScreen();
                     }, 1500);
-                    this.initGalaxyMode();
+                    // [OTIMIZAÇÃO] Não inicia a galáxia aqui
                 },
 
                 startExperience() {
@@ -500,8 +466,10 @@
                         this.elements.themeToggle.classList.remove('scale-0');
                         document.body.style.overflowY = 'auto';
                         this.setupAllFeatures();
-                        this.setupMainParticles();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        // [OTIMIZAÇÃO] Apenas ativa o efeito Ken Burns se não for mobile
+                        if (!isMobile()) {
+                            this.elements.headerImage.classList.add('kenburns-active');
+                        }
                     }, 500);
                 },
                 
@@ -516,6 +484,9 @@
                     this.setupJournalModal();
                     this.setupFinalLetter();
                     this.setupMusicBox();
+                    if (!isMobile()) {
+                         this.setupMainParticles();
+                    }
                     this.elements.galaxyBtn.addEventListener('click', () => this.enterGalaxyMode());
                     this.elements.galaxyExitBtn.addEventListener('click', () => this.exitGalaxyMode());
                     this.elements.galaxyOrbitBtn.addEventListener('click', () => this.unfocusPlanet());
@@ -539,7 +510,7 @@
                 setupLockScreen() {
                     const particlesConfig = { 
                         particles: { 
-                            number: { value: isMobile() ? 60 : 120, density: { enable: true, value_area: 800 }}, 
+                            number: { value: isMobile() ? 40 : 120, density: { enable: true, value_area: 800 }}, 
                             color: { value: "#ffffff" }, shape: { type: "star" }, 
                             opacity: { value: 0.8, random: true, anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }}, 
                             size: { value: 2, random: true }, 
@@ -707,7 +678,7 @@
 
                 setupPhotoCarousel() {
                     const swiperWrapper = this.elements.photoCarouselSection.querySelector('.swiper-wrapper');
-                    const imageParams = isMobile() ? '?tr=w-600,q-85' : ''; // Otimiza imagens para mobile
+                    const imageParams = isMobile() ? '?tr=w-600,q-85' : '';
                     const slides = DATA.galleryImages.map(img => `
                         <div class="swiper-slide" style="background-image:url(${img.src}${imageParams})"></div>
                     `).join('');
@@ -865,7 +836,7 @@
                         this.elements.gameTimer.textContent = '00:00';
                         this.memoryGame.timer = null;
                         
-                        const imageParams = isMobile() ? '?tr=w-400,q-80' : ''; // Otimiza imagens para mobile
+                        const imageParams = isMobile() ? '?tr=w-400,q-80' : '';
 
                         cardArray.forEach(item => {
                             const card = document.createElement('div');
@@ -964,7 +935,7 @@
                 setupMainParticles() {
                     const particlesConfig = { 
                         particles: { 
-                            number: { value: isMobile() ? 25 : 50, density: { enable: true, value_area: 800 }},
+                            number: { value: isMobile() ? 20 : 50, density: { enable: true, value_area: 800 }},
                             color: { value: "#e5e7eb" }, shape: { type: "circle" }, 
                             opacity: { value: 0.5, random: true }, size: { value: 1.5, random: true }, 
                             move: { enable: true, speed: 1, direction: "none", random: true, straight: false, out_mode: "out"}
@@ -987,7 +958,7 @@
 
                 // --- MODO GALÁXIA ---
                 initGalaxyMode() {
-                    if (this.galaxy.renderer) return;
+                    if (this.isGalaxyInitialized) return; // [OTIMIZAÇÃO] Não recria se já existe
 
                     const mobileDevice = isMobile();
                     const w = window.innerWidth;
@@ -998,14 +969,13 @@
                     this.galaxy.camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 5000);
                     this.galaxy.camera.position.copy(this.galaxy.initialCameraPos);
                     
-                    // Otimização do renderer para mobile
                     this.galaxy.renderer = new THREE.WebGLRenderer({ 
                         canvas: document.getElementById('galaxy-canvas'), 
-                        antialias: !mobileDevice, // Desativa antialias em mobile
+                        antialias: !mobileDevice,
                         alpha: true 
                     });
                     this.galaxy.renderer.setSize(w, h);
-                    this.galaxy.renderer.setPixelRatio(window.devicePixelRatio);
+                    this.galaxy.renderer.setPixelRatio(window.devicePixelRatio > 1.5 ? 1.5 : window.devicePixelRatio);
                     
                     this.galaxy.controls = new THREE.OrbitControls(this.galaxy.camera, this.galaxy.renderer.domElement);
                     this.galaxy.controls.enableDamping = true;
@@ -1018,7 +988,6 @@
                     this.galaxy.composer = new THREE.EffectComposer(this.galaxy.renderer);
                     this.galaxy.composer.addPass(renderScene);
 
-                    // Desativa o efeito de brilho (bloom) em mobile
                     if (!mobileDevice) {
                         const bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(w, h), 0.7, 0.5, 0.6);
                         this.galaxy.composer.addPass(bloomPass);
@@ -1029,19 +998,17 @@
                     const ambientLight = new THREE.AmbientLight(0x405080, 0.6);
                     this.galaxy.scene.add(ambientLight);
                     
-                    // Otimização da geometria do sol para mobile
-                    const sunGeometry = new THREE.SphereGeometry(12, mobileDevice ? 32 : 64, mobileDevice ? 32 : 64);
+                    const sunGeometry = new THREE.SphereGeometry(12, mobileDevice ? 24 : 64, mobileDevice ? 24 : 64);
                     const sun = new THREE.Mesh(
                         sunGeometry,
-                        new THREE.MeshBasicMaterial({ map: textureLoader.load('https://ik.imagekit.io/6iz6c073z/2k_sun.jpg?updatedAt=1749709638448') })
+                        new THREE.MeshBasicMaterial({ map: textureLoader.load('https://ik.imagekit.io/6iz6c073z/2k_sun.jpg?tr=w-1024,q-80') })
                     );
                     this.galaxy.scene.add(sun);
                     
-                    const skyboxTexture = textureLoader.load('https://ik.imagekit.io/6iz6c073z/2k_stars_milky_way.jpg?updatedAt=1749709639502');
+                    const skyboxTexture = textureLoader.load(`https://ik.imagekit.io/6iz6c073z/2k_stars_milky_way.jpg?${mobileDevice ? 'tr=w-1024,q-80' : 'tr=w-2048,q-85'}`);
                     this.galaxy.scene.background = skyboxTexture;
                     
-                    // Otimização da geometria dos planetas para mobile
-                    const planetSegments = mobileDevice ? 32 : 64;
+                    const planetSegments = mobileDevice ? 24 : 64;
                     DATA.galaxyPlanets.forEach((p, i) => {
                         const planetGroup = new THREE.Group();
                         const texture = textureLoader.load(p.textureUrl);
@@ -1077,17 +1044,12 @@
 
                     this.setupGalaxyClick();
                     this.animateGalaxy();
-
-                    window.addEventListener('resize', () => {
-                        this.galaxy.camera.aspect = window.innerWidth / window.innerHeight;
-                        this.galaxy.camera.updateProjectionMatrix();
-                        this.galaxy.renderer.setSize(window.innerWidth, window.innerHeight);
-                        this.galaxy.composer.setSize(window.innerWidth, window.innerHeight);
-                    });
+                    this.isGalaxyInitialized = true;
+                    this.elements.galaxyLoader.style.display = 'none';
                 },
 
                 animateGalaxy() {
-                    requestAnimationFrame(() => this.animateGalaxy());
+                    this.galaxy.animationFrameId = requestAnimationFrame(() => this.animateGalaxy());
                     const delta = this.galaxy.clock.getDelta();
                     const time = this.galaxy.clock.getElapsedTime();
 
@@ -1107,7 +1069,6 @@
                             const planet = this.galaxy.focusedPlanet;
                             controlTarget = new THREE.Vector3();
                             planet.getWorldPosition(controlTarget);
-
                             const cameraOffset = planet.userData.size * 5;
                             targetPosition = new THREE.Vector3(controlTarget.x + cameraOffset, controlTarget.y + cameraOffset / 2, controlTarget.z + cameraOffset);
                         } else {
@@ -1162,7 +1123,6 @@
 
                 focusOnPlanet(planetGroup) {
                     if (this.galaxy.isCameraMoving && this.galaxy.focusedPlanet === planetGroup) return;
-
                     const isNewPlanet = this.galaxy.focusedPlanet !== planetGroup;
                     
                     this.galaxy.isCameraMoving = true;
@@ -1200,32 +1160,84 @@
                 
                 navigateToPlanet(direction) {
                     if (this.galaxy.isCameraMoving || !this.galaxy.focusedPlanet) return;
-
                     const currentIndex = this.galaxy.focusedPlanet.userData.index;
                     const totalPlanets = this.galaxy.planets.length;
                     const newIndex = (currentIndex + direction + totalPlanets) % totalPlanets;
-                    
                     const newPlanet = this.galaxy.planets[newIndex];
                     this.focusOnPlanet(newPlanet);
                 },
 
                 enterGalaxyMode() {
-                    this.elements.mainContent.style.display = 'none';
-                    this.elements.themeToggle.style.display = 'none';
                     this.elements.galaxyMode.classList.remove('opacity-0', 'pointer-events-none');
+                    
+                    // [OTIMIZAÇÃO] Só inicia a galáxia na primeira vez que o botão é clicado
+                    if (!this.isGalaxyInitialized) {
+                        this.elements.galaxyLoader.style.display = 'flex';
+                        // Adiciona um pequeno delay para o loader aparecer antes de congelar a thread principal
+                        setTimeout(() => {
+                            this.initGalaxyMode();
+                        }, 100);
+                    }
                 },
                 
                 exitGalaxyMode() {
-                    if(this.galaxy.focusedPlanet) {
-                       this.unfocusPlanet();
-                    }
+                    this.elements.galaxyMode.classList.add('opacity-0', 'pointer-events-none');
+                    this.unfocusPlanet(); // Garante que a câmera está se movendo para a posição inicial
+                    
+                    // [GERENCIAMENTO DE MEMÓRIA] Destruir a cena para liberar memória
                     setTimeout(() => {
-                        this.elements.galaxyMode.classList.add('opacity-0', 'pointer-events-none');
-                        this.elements.mainContent.style.display = 'block';
-                        this.elements.themeToggle.style.display = 'flex';
-                        document.getElementById('galaxy-btn').scrollIntoView({ behavior: 'smooth' });
-                    }, 500);
+                        this.destroyGalaxy();
+                    }, 1000); // Espera a animação de fade-out terminar
                 },
+
+                // [GERENCIAMENTO DE MEMÓRIA] Nova função para limpar a cena 3D da memória
+                destroyGalaxy() {
+                    if (!this.isGalaxyInitialized) return;
+
+                    // Para a animação
+                    cancelAnimationFrame(this.galaxy.animationFrameId);
+
+                    // Limpa a cena
+                    this.galaxy.scene.traverse(object => {
+                        if (!object.isMesh) return;
+                        
+                        object.geometry.dispose();
+
+                        if (object.material.isMaterial) {
+                            this.cleanMaterial(object.material);
+                        } else {
+                            for (const material of object.material) this.cleanMaterial(material);
+                        }
+                    });
+                    this.galaxy.planets = [];
+                    this.galaxy.scene.clear();
+
+                    // Limpa o renderer
+                    this.galaxy.renderer.dispose();
+                    this.galaxy.renderer.forceContextLoss();
+                    this.galaxy.renderer.domElement = null; // Remove a referência ao canvas
+                    
+                    // Reseta o estado
+                    this.galaxy = {
+                        ...this.galaxy,
+                        renderer: null,
+                        camera: null,
+                        scene: null,
+                        composer: null,
+                        controls: null,
+                    };
+                    this.isGalaxyInitialized = false;
+                },
+
+                cleanMaterial(material) {
+                    material.dispose();
+                    for (const key of Object.keys(material)) {
+                        const value = material[key];
+                        if (value && typeof value === 'object' && 'minFilter' in value) {
+                            value.dispose();
+                        }
+                    }
+                }
             };
             App.init();
         });
